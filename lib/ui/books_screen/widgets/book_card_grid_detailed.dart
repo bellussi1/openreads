@@ -43,6 +43,7 @@ class BookCardGridDetailed extends StatelessWidget {
                     : _buildCardWithoutCover(context),
               ),
               _buildBottomTitle(),
+              _buildBottomSubtitle(),
               _buildBottomAuthor(),
             ],
           ),
@@ -136,6 +137,30 @@ class BookCardGridDetailed extends StatelessWidget {
     });
   }
 
+  Widget _buildBottomSubtitle() {
+    return BlocBuilder<DisplayCubit, DisplayState>(builder: (context, state) {
+      if (state.showTitleOverCover || book.subtitle?.isNotEmpty != true) {
+        return const SizedBox.shrink();
+      }
+
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                book.subtitle!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 11),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
   Widget _buildTitleOverlay() {
     return BlocBuilder<DisplayCubit, DisplayState>(
       builder: (context, state) {
@@ -161,15 +186,31 @@ class BookCardGridDetailed extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(2, 10, 2, 5),
-              child: Text(
-                book.title,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    book.title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  if (book.subtitle?.isNotEmpty == true)
+                    Text(
+                      book.subtitle!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                      ),
+                    ),
+                ],
               ),
             ),
           ),

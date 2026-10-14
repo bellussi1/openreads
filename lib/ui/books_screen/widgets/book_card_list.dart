@@ -295,6 +295,16 @@ class BookCardList extends StatelessWidget {
               _buildBookFormatIcon(context),
             ],
           ),
+          if (book.subtitle?.isNotEmpty == true)
+            Text(
+              book.subtitle!,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                fontSize: 13,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              ),
+            ),
           Text(
             book.author,
             softWrap: true,

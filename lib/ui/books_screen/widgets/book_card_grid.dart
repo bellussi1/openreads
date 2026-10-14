@@ -79,6 +79,24 @@ class BookCardGrid extends StatelessWidget {
               ),
             ],
           ),
+          if (book.subtitle?.isNotEmpty == true)
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    book.subtitle!,
+                    softWrap: true,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           Row(
             children: [
               Expanded(
