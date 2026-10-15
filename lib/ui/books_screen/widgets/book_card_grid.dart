@@ -25,9 +25,7 @@ class BookCardGrid extends StatelessWidget {
     final coverFile = book.getCoverFile();
 
     return Card.filled(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: InkWell(
         onTap: onPressed,
         onLongPress: onLongPressed,
@@ -35,14 +33,8 @@ class BookCardGrid extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: coverFile != null
-              ? _buildCardWithCover(
-                  heroTag: heroTag,
-                  file: coverFile,
-                )
-              : _buildCardWithoutCover(
-                  book: book,
-                  context: context,
-                ),
+              ? _buildCardWithCover(heroTag: heroTag, file: coverFile)
+              : _buildCardWithoutCover(book: book, context: context),
         ),
       ),
     );
